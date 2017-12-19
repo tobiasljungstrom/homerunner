@@ -1,3 +1,3 @@
 import homerunner from './app/main'
 
-homerunner()
+homerunner(document.getElementById('runnerbox'))

@@ -1,5 +1,5 @@
 const homerunner = function (baseElement) {
-  console.log('runnnn')
+  console.log('element', baseElement)
 }
 
 export default homerunner
