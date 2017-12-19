@@ -1,0 +1,17 @@
+{
+  "name": "@telia/homerunner",
+  "version": "0.0.1",
+  "description": "A Telia branded runner game",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "author": "Tobias Ljungström",
+  "license": "UNLICENCED",
+  "devDependencies": {
+    "standard": "^10.0.3",
+    "webpack": "^3.10.0"
+  }
+}
