@@ -3,8 +3,12 @@ import './styles/main.css'
 const GROUND_HEIGHT = 100
 const ARROW_UP = 38
 
+// Elements
 let player = null
+
+// State
 let isJumping = false
+let currentScore = 0
 
 const homerunner = function (baseElement) {
   const mainCanvas = document.createElement('div')
@@ -13,6 +17,7 @@ const homerunner = function (baseElement) {
 
   createGround(mainCanvas)
   createPlayer(mainCanvas)
+  createCounter(mainCanvas)
 
   start()
 }
@@ -32,8 +37,16 @@ function createPlayer (container) {
   player = playerDiv
 }
 
+function createCounter (container) {
+  const counterDiv = document.createElement('div')
+  counterDiv.className = 'homerunner-counter'
+  counterDiv.innerHTML = '0'
+  container.appendChild(counterDiv)
+}
+
 function start () {
   listenForInput()
+  countScore()
 }
 
 function listenForInput () {
@@ -53,6 +66,17 @@ function jump () {
     player.style.transform = 'translateY(0px)'
     isJumping = false
   }, 250)
+}
+
+function countScore () {
+  window.setInterval(() => {
+    currentScore++
+    updateScore()
+  }, 1000)
+}
+
+function updateScore () {
+  document.querySelector('.homerunner-counter').innerHTML = currentScore
 }
 
 export default homerunner
