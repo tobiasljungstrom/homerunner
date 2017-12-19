@@ -23,6 +23,11 @@
 
   position: absolute;
   left: 100px;
+
+  transform: translateY(0px);
+
+  transition-property: transform;
+  transition-duration: 240ms;
 }
 
 .homerunner-counter {
@@ -32,4 +37,14 @@
 
   font-size: 3em;
   color: white;
+}
+
+.homerunner-obstacle {
+  width: 50px;
+  height: 50px;
+  background-color: purple;
+
+  position: absolute;
+  bottom: 100px;
+  right: 10px;
 }
