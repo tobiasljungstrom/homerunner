@@ -1,6 +1,10 @@
 import './styles/main.css'
 
 const GROUND_HEIGHT = 100
+const ARROW_UP = 38
+
+let player = null
+let isJumping = false
 
 const homerunner = function (baseElement) {
   const mainCanvas = document.createElement('div')
@@ -9,6 +13,8 @@ const homerunner = function (baseElement) {
 
   createGround(mainCanvas)
   createPlayer(mainCanvas)
+
+  start()
 }
 
 function createGround (container) {
@@ -23,6 +29,30 @@ function createPlayer (container) {
   playerDiv.className = 'homerunner-player'
   playerDiv.style.bottom = `${GROUND_HEIGHT}px`
   container.appendChild(playerDiv)
+  player = playerDiv
+}
+
+function start () {
+  listenForInput()
+}
+
+function listenForInput () {
+  window.addEventListener('keyup', (key) => {
+    if (key.keyCode === ARROW_UP) {
+      if (!isJumping) {
+        jump()
+      }
+    }
+  })
+}
+
+function jump () {
+  player.style.transform = 'translateY(-100px)'
+  isJumping = true
+  setTimeout(() => {
+    player.style.transform = 'translateY(0px)'
+    isJumping = false
+  }, 250)
 }
 
 export default homerunner
