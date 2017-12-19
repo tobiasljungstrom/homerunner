@@ -18,9 +18,9 @@
 }
 
 .homerunner-player {
-  background-color: tomato;
+  background-color: transparent;
   width: 70px;
-  height: 200px;
+  height: 330px;
 
   position: absolute;
   right: 1000px;
@@ -34,12 +34,13 @@
 }
 
 .homerunner-player-gfx {
-  width: 100px;
-  height: 200px;
+  width: 120px;
+  height: 350px;
+
+  background: url('../svg/player.svg') no-repeat;
 
   position: absolute;
-  bottom: 0;
-  right: -15px;
+  top: 0px;
 
   z-index: 3;
 }
@@ -48,7 +49,7 @@
   width: inherit;
 
   position: absolute;
-  bottom: -105px;
+  bottom: 0px;
 }
 
 .homerunner-counter {
@@ -64,22 +65,47 @@
   width: 50px;
   height: 50px;
   background-color: purple;
+  border-radius: 10%;
 
   position: absolute;
+  right: -1000;
   bottom: 100px;
-  right: -100px;
 
   z-index: 3;
 }
 
 .homerunner-bg {
-  width: 120px;
+  width: 134px;
   height: 300px;
-  background-color: rgb(53, 109, 48);
+  background: url('../png/tree.png');
 
   position: absolute;
+  right: -1000;
   bottom: 100px;
-  right: -100px;
 
   z-index: 1;
+}
+
+.homerunner-game-over-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+
+  z-index: 4;
+}
+
+.homerunner-game-over-overlay h1 {
+  font-size: 10em;
+}
+
+.homerunner-game-over-overlay p {
+font-size: 5em;
 }

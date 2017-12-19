@@ -11,6 +11,7 @@
   "author": "Tobias Ljungström",
   "license": "UNLICENCED",
   "devDependencies": {
+    "file-loader": "^1.1.6",
     "standard": "^10.0.3",
     "svg-inline-loader": "^0.8.0",
     "webpack": "^3.10.0"

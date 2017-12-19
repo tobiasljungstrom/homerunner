@@ -1,5 +1,4 @@
 import './styles/main.css'
-import playerImage from './svg/player.svg'
 
 const GROUND_HEIGHT = 100
 const ARROW_UP = 38
@@ -8,9 +7,14 @@ const JUMP_HEIGHT = 150
 
 // Elements
 let player = null
+let canvas = null
 
 // State
-let gameIsRunning = true
+let gameLoop = null
+let obstacleLoop = null
+let bgLoop = null
+let counterLoop = null
+
 let currentScore = 0
 let latestJump = 0
 let obstacles = []
@@ -20,6 +24,7 @@ const homerunner = function (baseElement) {
   const mainCanvas = document.createElement('div')
   mainCanvas.className = 'homerunner-main-canvas'
   baseElement.appendChild(mainCanvas)
+  canvas = mainCanvas
 
   createGround(mainCanvas)
   createPlayer(mainCanvas)
@@ -45,7 +50,6 @@ function createPlayer (container) {
 
   const playerGfx = document.createElement('div')
   playerGfx.className = 'homerunner-player-gfx'
-  playerGfx.innerHTML = playerImage
   playerGfx.style.bottom = `${GROUND_HEIGHT}px`
   player.appendChild(playerGfx)
 }
@@ -62,7 +66,7 @@ function start () {
   countScore()
   spawnObstacles()
   spawnBackground()
-  window.setInterval(mainLoop, 10)
+  gameLoop = setInterval(mainLoop, 10)
 }
 
 function listenForInput () {
@@ -91,7 +95,7 @@ function canJump () {
 }
 
 function countScore () {
-  window.setInterval(() => {
+  counterLoop = setInterval(() => {
     currentScore++
     updateScore()
   }, 1000)
@@ -102,11 +106,11 @@ function updateScore () {
 }
 
 function spawnObstacles () {
-  window.setInterval(spawnObstacle, 1000)
+  obstacleLoop = setInterval(spawnObstacle, 1000)
 }
 
 function spawnBackground () {
-  window.setInterval(spawnBgObject, 1000)
+  bgLoop = setInterval(spawnBgObject, 1000)
 }
 
 function spawnObstacle () {
@@ -117,7 +121,7 @@ function spawnObstacle () {
 }
 
 function spawnBgObject () {
-  const bgDiv = document.createElement('div')
+  const bgDiv = document.createElement('img')
   bgDiv.className = 'homerunner-bg'
   document.querySelector('.homerunner-main-canvas').appendChild(bgDiv)
   bgObjects.push([bgDiv, -100])
@@ -161,9 +165,7 @@ function mainLoop () {
   obstacles.forEach(obstacle => {
     const element = obstacle[0]
     if (collides(element, player)) {
-      element.style.backgroundColor = 'red'
-    } else if (element.style.backgroundColor !== 'purple') {
-      element.style.backgroundColor = 'purple'
+      gameOver()
     }
   })
 }
@@ -178,6 +180,18 @@ function collides (el1, el2) {
     rect1.bottom < rect2.top ||
     rect1.left > rect2.right
   )
+}
+
+function gameOver () {
+  clearInterval(gameLoop)
+  clearInterval(obstacleLoop)
+  clearInterval(bgLoop)
+  clearInterval(counterLoop)
+
+  const overlay = document.createElement('div')
+  overlay.className = 'homerunner-game-over-overlay'
+  overlay.innerHTML = `<h1>GAME OVER</h1><p>Final score: ${currentScore}</p>`
+  canvas.appendChild(overlay)
 }
 
 export default homerunner
