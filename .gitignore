@@ -93,4 +93,7 @@ Temporary Items
 
 # Custom
 
-dist/
+dist/*.js
+dist/*.map
+dist/*.svg
+dist/*.png
